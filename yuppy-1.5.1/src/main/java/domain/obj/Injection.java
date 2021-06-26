@@ -1,0 +1,5 @@
+package domain.obj;
+
+public enum Injection {
+	URL, RANK_SEARCH_RANGE, MYPAGE_SERACH_RANGE, PAGE_SERACH_RANGE, COUNTRY, STAR_MIN, STAR_MAX, PP_MIN, PP_MAX;
+}

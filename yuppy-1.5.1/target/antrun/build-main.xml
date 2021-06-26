@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <exec failonerror="true" executable="C:\Program Files\Java\jdk-15.0.2/bin/jar">
+      <arg value="--main-class" />
+      <arg value="app.YuppyMain" />
+      <arg value="--module-version" />
+      <arg value="0.0.1-SNAPSHOT" />
+      <arg value="--update" />
+      <arg value="--file" />
+      <arg value="C:\temp\workspace\workspace\yuppy-1.5.1\target/mods/yuppy-0.0.1-SNAPSHOT.jar" />
+    </exec>
+  </target>
+</project>
