@@ -1,0 +1,85 @@
+このアプリケーションでは以下に記すライセンスのもと、外部ライブラリを使用しています。
+
+
+jsoup1.13.1
+Copyright © 2009 - 2021 Jonathan Hedley (https://jsoup.org/)
+Released under the MIT license
+下記リンクはライセンス文
+https://jsoup.org/license
+
+
+jackson-annotations2.12.3
+FasterXML/jackson-annotations is licensed under the
+Apache License 2.0	
+下記リンクはライセンス文
+https://github.com/FasterXML/jackson-annotations/blob/2.12/LICENSE
+
+
+jackson-core2.12.3
+FasterXML/jackson-core is licensed under the
+Apache License 2.0
+下記リンクはライセンス文
+https://github.com/FasterXML/jackson-core/blob/2.12/LICENSE
+
+
+jackson-databind2.12.3
+FasterXML/jackson-databind is licensed under the
+Apache License 2.0
+下記リンクはライセンス文
+https://github.com/FasterXML/jackson-databind/blob/2.12/LICENSE
+
+javafx-base
+javafx-controls
+javafx-graphics
+javafx-fxml
+The GNU General Public License (GPL)
+Version 2, June 1991
+Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+下記リンクはライセンス文
+http://openjdk.java.net/legal/gplv2+ce.html
+
+
+logback-classic
+logback-core
+以下ライセンス文
+Logback: the reliable, generic, fast and flexible logging framework.
+Copyright (C) 1999-2017, QOS.ch. All rights reserved. 
+
+This program and the accompanying materials are dual-licensed under
+either the terms of the Eclipse Public License v1.0 as published by
+the Eclipse Foundation
+ 
+  or (per the licensee's choosing)
+ 
+under the terms of the GNU Lesser General Public License version 2.1
+as published by the Free Software Foundation.
+
+
+Lombok
+Copyright © 2009-2021 The Project Lombok Authors, licensed under the MIT license.
+https://opensource.org/licenses/mit-license.php
+
+
+Slf4j
+以下ライセンス文
+ Copyright (c) 2004-2017 QOS.ch
+ All rights reserved.
+ Permission is hereby granted, free  of charge, to any person obtaining
+ a  copy  of this  software  and  associated  documentation files  (the
+ "Software"), to  deal in  the Software without  restriction, including
+ without limitation  the rights to  use, copy, modify,  merge, publish,
+ distribute,  sublicense, and/or sell  copies of  the Software,  and to
+ permit persons to whom the Software  is furnished to do so, subject to
+ the following conditions:
+ 
+ The  above  copyright  notice  and  this permission  notice  shall  be
+ included in all copies or substantial portions of the Software.
+ 
+ THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+ EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+ MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
