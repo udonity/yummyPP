@@ -6,12 +6,25 @@ import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * グローバルランキングページのURL
+ */
 @Slf4j
 public class GlobalRankingURL extends RankingURL {
 
+	/**
+	 * ランキングリストでのページ数
+	 * "https://scoresaber.com/global/XXX"のXXXの部分
+	 */
 	private int page;
+	/**
+	 * 整形されたURL
+	 */
 	private URL url;
 
+	/**
+	 * @param rank ユーザーのグローバルランク数
+	 */
 	public GlobalRankingURL(int rank) {
 		super(rank);
 	}
@@ -30,7 +43,8 @@ public class GlobalRankingURL extends RankingURL {
 
 	@Override
 	public void setURL(int rank) {
-		int nextPage = (rank % 50 == 0) ? (rank / 50) : (rank / 50 + 1);
+		int nextPage = (rank % 50 == 0) ? (rank / 50) : (rank / 50 + 1); // 1ページあたり50人表示される
+		// ページが変わらないならそのまま返す
 		if (this.page == nextPage) {
 			return;
 		}
