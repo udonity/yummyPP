@@ -39,6 +39,7 @@ public class ClientInjection {
 			this.clientURL = new URL(eString.getProperty(Injection.URL).trim());
 		} catch (MalformedURLException e) {
 			log.error("URL is Illegal.URL:" + this.clientURL, e);
+			System.exit(-1);
 		}
 		this.star = new Range(eString.getProperty(Injection.STAR_MIN), eString.getProperty(Injection.STAR_MAX));
 		this.pp = new Range(eString.getProperty(Injection.PP_MIN), eString.getProperty(Injection.PP_MAX));
