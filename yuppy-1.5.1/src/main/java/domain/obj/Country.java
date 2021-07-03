@@ -2,9 +2,15 @@ package domain.obj;
 
 import lombok.NonNull;
 
+/**
+ * 国を表すクラス
+ */
 public class Country {
 	private Type country;
 
+	/**
+	 * @param countryStr 空の場合はglobalとなる。
+	 */
 	public Country(@NonNull String countryStr) {
 		if(countryStr.isEmpty() || countryStr.equals("global")) {
 			this.country = Type.GLOBAL;
@@ -29,15 +35,19 @@ public class Country {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Country other = (Country) obj;
-		if (country != other.country)
+		if (country != other.country) {
 			return false;
+		}
 		return true;
 	}
 
