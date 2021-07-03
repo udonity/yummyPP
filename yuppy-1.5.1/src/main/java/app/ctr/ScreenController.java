@@ -65,6 +65,7 @@ public class ScreenController {
 			}
 		} catch (MalformedURLException e) {
 			log.warn("URI NotFound.", e);
+			System.exit(-1);
 		}
 		if(url == null) {
 			NullPointerException e = new NullPointerException("URL is null");
@@ -87,14 +88,19 @@ public class ScreenController {
 
 	@FXML
 	void submitOK(ActionEvent event) {
+		// ローディング中なら何もしない
+		if(loading.getImage() != null) {
+			log.info("Called again");
+			return;
+		}
+		
 		ExecutorService exService = Executors.newCachedThreadPool();
 
 		Task<Boolean> imgTask = new Task<>() {
 			@Override
 			protected Boolean call() {
 				log.info("Loading IMG:Update");
-				Image image = new Image(
-						getClass().getResourceAsStream("/loading.gif"));
+				Image image = new Image(getClass().getResourceAsStream("/loading.gif"));
 				loading.setImage(image);
 				return true;
 			}
@@ -119,13 +125,9 @@ public class ScreenController {
 		});
 
 		tfTask.setOnSucceeded(e -> {
-			// ウインドウを閉じる
-			this.submit.getScene().getWindow().hide();
-
 			// 完了画面を表示
 			URL compURL = null;
-			compURL = Thread.currentThread().getContextClassLoader()
-					.getResource("CompletionScreen.fxml");
+			compURL = Thread.currentThread().getContextClassLoader().getResource("CompletionScreen.fxml");
 			if (compURL == null) {
 				try {
 					compURL = new File("src\\main\\resources\\CompletionScreen.fxml").toURI().toURL();
@@ -146,10 +148,13 @@ public class ScreenController {
 			stage.setScene(scene);
 			stage.setTitle("完了画面");
 			stage.show();
+			// ローディングイメージを消す
+			loading.setImage(null);
 			log.info("Successful completion");
 		});
 		exService.execute(tfTask);
 
 		exService.shutdown();
+		
 	}
 }
