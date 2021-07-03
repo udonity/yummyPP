@@ -12,21 +12,39 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class Song implements Comparable<Song> {
 
+	/**
+	 * 曲を識別する一意な文字列
+	 */
 	@JsonProperty("hash")
 	private final String hash;
 
+	/**
+	 * 曲名
+	 */
 	@JsonProperty("songName")
 	private final String songName;
 
+	/**
+	 * 難易度（Hard,Expertなど）
+	 */
 	@JsonIgnore
 	private final String difficulty;
 
+	/**
+	 * PP
+	 */
 	@JsonIgnore
 	private final double pp;
 
+	/**
+	 * ★（難易度）
+	 */
 	@JsonIgnore
 	private double star;
 
+	/**
+	 * 曲詳細ページのURL
+	 */
 	@JsonIgnore
 	private URL songURL;
 
@@ -39,31 +57,26 @@ public final class Song implements Comparable<Song> {
 	public Song(@NonNull String hash, @NonNull String songName,
 			@NonNull String difficulty, double pp) {
 		if (!hash.matches("[0-9a-zA-Z]{1,}")) {
-			IllegalArgumentException e = new IllegalArgumentException(
-					"hash must be [0-9a-zA-Z]{1,}");
+			IllegalArgumentException e = new IllegalArgumentException("hash must be [0-9a-zA-Z]{1,}");
 			log.error("Hash:" + hash + ", songName:" + songName, e);
 			throw e;
 		}
 		this.hash = hash;
 		if (songName.isEmpty()) {
-			IllegalArgumentException e = new IllegalArgumentException(
-					"songName should not be empty");
+			IllegalArgumentException e = new IllegalArgumentException("songName should not be empty");
 			log.error("Hash:" + hash, e);
 			throw e;
 		}
 		this.songName = songName;
 		if (difficulty.isEmpty()) {
-			IllegalArgumentException e = new IllegalArgumentException(
-					"difficulty should not be empty");
+			IllegalArgumentException e = new IllegalArgumentException("difficulty should not be empty");
 			log.error("Hash:" + hash + ", songName:" + songName, e);
 			throw e;
 		}
 		this.difficulty = difficulty;
 		if (pp <= 0.0D) {
-			IllegalArgumentException e = new IllegalArgumentException(
-					"pp must be greater than 0");
-			log.error("Hash:" + hash + ", songName:" + songName + ", pp:" + pp,
-					e);
+			IllegalArgumentException e = new IllegalArgumentException("pp must be greater than 0");
+			log.error("Hash:" + hash + ", songName:" + songName + ", pp:" + pp, e);
 			throw e;
 		}
 		this.pp = pp;
@@ -83,8 +96,7 @@ public final class Song implements Comparable<Song> {
 	@JsonIgnore
 	public void setStar(double star) {
 		if (star <= 0.0D) {
-			IllegalArgumentException e = new IllegalArgumentException(
-					"star must be greater than 0");
+			IllegalArgumentException e = new IllegalArgumentException("star must be greater than 0");
 			log.error("Star:" + star, e);
 			throw e;
 		}
@@ -127,16 +139,20 @@ public final class Song implements Comparable<Song> {
 
 	@JsonIgnore
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Song other = (Song) obj;
 		if (this.hash == null) {
-			if (other.hash != null)
+			if (other.hash != null) {
 				return false;
+			}
 		} else if (!this.hash.equals(other.hash)) {
 			return false;
 		}
