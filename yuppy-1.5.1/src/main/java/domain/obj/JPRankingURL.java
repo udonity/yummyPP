@@ -20,10 +20,13 @@ public class JPRankingURL extends RankingURL {
 	 */
 	private int page;
 
+	/**
+	 * 整形されたURL
+	 */
 	private URL url;
 
 	/**
-	 * @param rank JPのランク数
+	 * @param rank ユーザーのJPランク数
 	 */
 	public JPRankingURL(int rank) {
 		super(rank);
@@ -87,12 +90,15 @@ public class JPRankingURL extends RankingURL {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		JPRankingURL other = (JPRankingURL) obj;
 		return page == other.page && Objects.equals(url, other.url);
 	}
