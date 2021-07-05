@@ -9,10 +9,19 @@ import org.jsoup.nodes.Document;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+/**
+ * ScoreSaber上のHTMLドキュメントを表す。
+ */
 @Slf4j
 class ScoreSaberDocument {
+	/**
+	 * HTMLそのままのドキュメント
+	 */
 	private Document document;
 
+	/**
+	 * @param url 接続するURL
+	 */
 	public ScoreSaberDocument(@NonNull URL url) {
 		// サイトチェック
 		if(!url.getHost().contains("scoresaber.com")) {
@@ -28,6 +37,9 @@ class ScoreSaberDocument {
 		Objects.requireNonNull(this.document);
 	}
 
+	/**
+	 * @return HTMLから取得したそのままのドキュメントを返す
+	 */
 	public Document getDocument() {
 		return document;
 	}

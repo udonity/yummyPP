@@ -18,22 +18,51 @@ import domain.service.UserSongExtractor;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ユーザーページ上のドキュメントを取得するクラス。
+ * 難易度・ハッシュ・タイトル・PP・曲詳細ページへのURLそれぞれの情報を一つずつ取得し、
+ * 各リストへ格納。その後それぞれのリストからSongListへ整形する。
+ */
 @Slf4j
 class UserPageDocument extends ScoreSaberDocument implements UserSongExtractor{
+	/**
+	 * 難易度（Hard,Expertなど)
+	 */
 	private List<String> difficultyList;
 
+	/**
+	 * 曲の一意な文字列を表すハッシュ
+	 */
 	private List<String> hashList;
 
+	/**
+	 * 曲のタイトル
+	 */
 	private List<String> nameList;
 
+	/**
+	 * PP
+	 */
 	private List<Double> ppList;
 
+	/**
+	 * 曲詳細ページへのURL
+	 */
 	private List<URL> songURLs;
 
+	/**
+	 * HTML内の曲の情報部分
+	 */
 	private Elements songElements;
-	
+
+	/**
+	 * ユーザーページで1ページ内には必ず8曲分の情報があるので、それぞれのリストサイズは8となる。
+	 */
 	private static final int size = 8;
 
+	/**
+	 * @param url ユーザーページへのURL
+	 */
 	public UserPageDocument(URL url) {
 		super(url);
 		// ユーザページかチェック
@@ -45,29 +74,32 @@ class UserPageDocument extends ScoreSaberDocument implements UserSongExtractor{
 		this.songElements = super.getDocument().body().select("body div div div div div table tbody tr th");
 	}
 
+	/**
+	 * 難易度・ハッシュ・タイトル・PP・URLそれぞれの情報をDocumentより取得する。
+	 */
 	@Override
 	public void extract() {
 		this.difficultyList = songElements.select("div div span[style]").stream()
-				.map(Element::text)
-				.collect(Collectors.toList());
+								.map(Element::text)
+								.collect(Collectors.toList());
 
 		this.hashList = songElements.select("div div img").stream()
-					.map(UserPageDocument::elementToHashText)
-					.collect(Collectors.toList());
+						.map(UserPageDocument::elementToHashText)
+						.collect(Collectors.toList());
 
 		this.nameList = songElements.select("div div a").stream()
-					.map(Element::text)
-					.collect(Collectors.toList());
+						.map(Element::text)
+						.collect(Collectors.toList());
 
 		this.ppList = songElements.select("span[class=scoreTop ppValue]").stream()
-				.map(Element::text)
-				.map(Double::valueOf)
-				.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+						.map(Element::text)
+						.map(Double::valueOf)
+						.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
 
 		this.songURLs = songElements.select("th div div a").stream()
-					.map(Node::toString)
-					.map(UserPageDocument::textToURL)
-					.collect(Collectors.toList());
+						.map(Node::toString)
+						.map(UserPageDocument::textToURL)
+						.collect(Collectors.toList());
 
 		// 長さチェック
 		if(this.difficultyList.size() != size
@@ -85,6 +117,9 @@ class UserPageDocument extends ScoreSaberDocument implements UserSongExtractor{
 				throw e;
 		}
 	}
+	/**
+	 * 指定されたPPレンジ内の曲を収集し、SongListとして返す。
+	 */
 	@Override
 	public SongList obtainSongList(@NonNull Range ppRange) {
 		double ppMin = ppRange.doubleMin();
@@ -112,10 +147,22 @@ class UserPageDocument extends ScoreSaberDocument implements UserSongExtractor{
 		return songs;
 	}
 
+	/**
+	 * Streamのヘルパーメソッド。
+	 * Elementをテキストへ変換しトリミングした状態で返す。
+	 * @param e Element
+	 * @return 文字列
+	 */
 	private static String elementToHashText(Element e) {
 		 return e.toString().substring(32, 72);
 	}
 
+	/**
+	 * Streamのヘルパーメソッド。
+	 * 文字列をトリミングし、URLへと変換したものを返す。
+	 * @param text 文字列
+	 * @return URL
+	 */
 	private static URL textToURL(String text) {
 		 int startIndex = text.indexOf("\"") + 1;
 		 int endIndex = text.indexOf(">") - 1;

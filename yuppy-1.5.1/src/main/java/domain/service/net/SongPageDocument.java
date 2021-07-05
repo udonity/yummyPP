@@ -9,15 +9,25 @@ import org.jsoup.nodes.Element;
 import domain.service.SongPageExtractor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 曲詳細ページのドキュメントを扱うクラス。
+ */
 @Slf4j
 class SongPageDocument extends ScoreSaberDocument implements SongPageExtractor{
 	/**
+	 *  ★の値
 	 *  読み込みしていない状態は-1
 	 */
 	private double star = -1;
+	/**
+	 * Song情報があるElement
+	 */
 	private Element element;
 
 
+	/**
+	 * @param url 曲詳細ページへのURL
+	 */
 	public SongPageDocument(URL url) {
 		super(url);
 		Document docu = super.getDocument();
@@ -28,6 +38,7 @@ class SongPageDocument extends ScoreSaberDocument implements SongPageExtractor{
 
 
 	/**
+	 * ★の値を返す。
 	 * extractを実行していないなら、内部で実行される。
 	 */
 	@Override
@@ -37,7 +48,7 @@ class SongPageDocument extends ScoreSaberDocument implements SongPageExtractor{
 			if(star != -1) {
 				return this.star;
 			}
-			
+
 			IllegalStateException e
 				= new IllegalStateException("Failed to write star. Element:\n" + this.element.toString());
 			log.warn("Star is Illegal.", e);
@@ -46,6 +57,9 @@ class SongPageDocument extends ScoreSaberDocument implements SongPageExtractor{
 		return this.star;
 	}
 
+	/**
+	 * 星情報を取得する。
+	 */
 	@Override
 	public void extract() {
 		String text = this.element.getElementsByAttributeValue("property", "og:description").toString();

@@ -15,12 +15,25 @@ import org.jsoup.select.Elements;
 import domain.obj.Country;
 import domain.service.MyPageExtractor;
 
+/**
+ * 自分のページのドキュメントを表すクラス。
+ */
 class MyPageDocument extends UserPageDocument implements MyPageExtractor{
+	/**
+	 * マイページのランク情報Elements
+	 */
 	private Elements rankElements;
 
+	/**
+	 * 日本ランキングとグローバルランキングを持つマップ
+	 */
 	private Map<Country, Integer> countryToRank;
 
+	/**
+	 * @param url マイページのURL
+	 */
 	public MyPageDocument(URL url) {
+		// 親クラスで1ページ目の曲情報を取得する。
 		super(url);
 		this.countryToRank = new HashMap<>();
 		Document docu = super.getDocument();
@@ -34,6 +47,9 @@ class MyPageDocument extends UserPageDocument implements MyPageExtractor{
 		return this.countryToRank;
 	}
 
+	/**
+	 * マイページ上のランキング情報を取得する。
+	 */
 	@Override
 	public void extract() {
 		super.extract();
