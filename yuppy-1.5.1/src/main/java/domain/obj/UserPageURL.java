@@ -7,6 +7,9 @@ import java.util.Objects;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ユーザーページを表すURL
+ */
 @Slf4j
 public class UserPageURL {
 	/**

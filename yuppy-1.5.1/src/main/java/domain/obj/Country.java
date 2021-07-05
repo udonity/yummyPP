@@ -51,6 +51,9 @@ public class Country {
 		return true;
 	}
 
+	/**
+	 * 国のタイプ
+	 */
 	public enum Type {
 		JP,
 		GLOBAL

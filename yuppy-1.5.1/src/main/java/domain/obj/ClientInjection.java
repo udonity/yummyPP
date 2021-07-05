@@ -7,29 +7,53 @@ import domain.repo.Property;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * クライアントが入力した情報を持つクラス。
+ * domainパッケージ内で扱うクラスへ加工する責務を持つ。
+ */
 @Slf4j
 public class ClientInjection {
 
 	/**
+	 * グローバルランキングか日本ランキングかを指定するための国情報。
 	 * 空ならばglobal
 	 */
 	private final Country country;
 
 	/**
+	 * ランキングページで上下何位分読み込むかのレンジ。
 	 * 空なら5
 	 */
 	private final RankingRange rankingRange;
 
+	/**
+	 * 自分以外のユーザーページで何ページ分読み込むか
+	 */
 	private final Range anotherUserPageRange;
 
+	/**
+	 * 自分のユーザーページで何ページ分読み込むか
+	 */
 	private final Range myPageRange;
 
+	/**
+	 * 自分のページのURL
+	 */
 	private URL clientURL;
 
+	/**
+	 * ★のレンジ
+	 */
 	private final Range star;
 
+	/**
+	 * PPのレンジ
+	 */
 	private final Range pp;
 
+	/**
+	 * @param eString 検索時に指定したいプロパティ
+	 */
 	public ClientInjection(@NonNull Property eString) {
 		this.country = new Country(eString.getProperty(Injection.COUNTRY));
 		this.rankingRange = new RankingRange(eString.getProperty(Injection.RANK_SEARCH_RANGE), this.country);

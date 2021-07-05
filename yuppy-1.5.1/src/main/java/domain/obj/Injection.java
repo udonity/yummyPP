@@ -1,5 +1,8 @@
 package domain.obj;
 
+/**
+ * クライアントが入力した情報を区別するための列挙型。
+ */
 public enum Injection {
 	URL,
 	/**
