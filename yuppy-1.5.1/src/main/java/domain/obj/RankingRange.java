@@ -3,7 +3,8 @@ package domain.obj;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 /**
- * setRangeを行っていない状態でgetterを用いるとIllegalStateExceptionをスローする
+ * Rankingの範囲を表すクラス。
+ * setRangeを行っていない状態でgetterを用いるとIllegalStateExceptionをスローする。
  */
 @Slf4j
 public class RankingRange extends Range {
@@ -20,6 +21,7 @@ public class RankingRange extends Range {
 	 * @param country 国別ランキングかglobalランキングかの指定
 	 */
 	public RankingRange(@NonNull String rangeStr, @NonNull Country country) {
+		// minとmaxを-1にする
 		super("","");
 		this.country = country;
 		String trimmedRangeStr = rangeStr.trim();
