@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import domain.obj.SongList;
 
+/**
+ * JSONで出力するための集合体クラス
+ */
 public class JSONElement {
 	@JsonProperty("playListTitle")
 	private String title;

@@ -9,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 曲を表すクラス。
+ */
 @Slf4j
 public final class Song implements Comparable<Song> {
 
