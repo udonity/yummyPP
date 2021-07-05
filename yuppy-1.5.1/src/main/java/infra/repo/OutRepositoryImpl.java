@@ -18,8 +18,15 @@ import domain.repo.OutRepository;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * OutRepositoryの実装クラス。
+ * ファイルへの出力を担う。
+ */
 @Slf4j
 class OutRepositoryImpl implements OutRepository{
+	/**
+	 * 出力する曲リスト
+	 */
 	private SongList songList;
 
 	public OutRepositoryImpl(@NonNull SongList songList) {
@@ -30,6 +37,7 @@ class OutRepositoryImpl implements OutRepository{
 	public void storeText(@NonNull String title) {
 		log.info("Output to Notepad.");
 		File f = new File(title + ".txt");
+		// UTF-8で出力
 		try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(f), "UTF-8")) {
 			BufferedWriter bw = new BufferedWriter(osw);
 			for (Song song : this.songList.getSongs()) {
@@ -38,8 +46,7 @@ class OutRepositoryImpl implements OutRepository{
 				bw.flush();
 			}
 		} catch (UnsupportedEncodingException e) {
-			log.warn("Encoding failure. SongList:" + this.songList.toString(),
-					e);
+			log.warn("Encoding failure. SongList:" + this.songList.toString(), e);
 		} catch (FileNotFoundException e) {
 			log.warn("File NotFound. Path:" + f.toURI().toString(), e);
 		} catch (IOException e) {
